@@ -3,7 +3,7 @@ import QtQuick.Controls 2.5
 
 ApplicationWindow {
     visible: true
-    width: 640
+    width: 320
     height: 480
     title: qsTr("Tabs")
 

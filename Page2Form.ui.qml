@@ -1,10 +1,11 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import com.hadesk.Player 1.0
 
 Page {
     id: page
-    width: 600
-    height: 400
+    width: 320
+    height: 480
 
     header: Label {
         text: qsTr("Page 2")
@@ -17,6 +18,10 @@ Page {
         anchors.centerIn: parent
     }
 
+    Player {
+        id: player
+    }
+
     Button {
         id: button
         width: 99
@@ -26,6 +31,10 @@ Page {
         anchors.topMargin: 6
         anchors.left: parent.left
         anchors.leftMargin: 12
+        onClicked: {
+            console.log("Play")
+            player.play()
+        }
     }
 }
 

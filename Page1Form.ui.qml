@@ -1,9 +1,10 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
+import QtCharts 2.12
 
 Page {
-    width: 600
-    height: 400
+    width: 320
+    height: 480
 
     header: Label {
         text: qsTr("Page 1")
@@ -11,8 +12,33 @@ Page {
         padding: 10
     }
 
-    Label {
-        text: qsTr("You are on Page 1.")
-        anchors.centerIn: parent
+    ChartView {
+        id: line
+        x: 61
+        y: 6
+        width: 198
+        height: 92
+        LineSeries {
+            name: "LineSeries"
+            XYPoint {
+                x: 0
+                y: 2
+            }
+
+            XYPoint {
+                x: 1
+                y: 1.2
+            }
+
+            XYPoint {
+                x: 2
+                y: 3.3
+            }
+
+            XYPoint {
+                x: 5
+                y: 2.1
+            }
+        }
     }
 }
