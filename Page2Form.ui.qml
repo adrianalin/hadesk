@@ -8,18 +8,19 @@ Page {
     height: 480
 
     MItem {
-        id:out_temp
+        id: out_temp
         anchors.left: parent.left
-        image_source: "icons/thermometer"
+        image_source: "icons/thermometer.png"
         text_prop: "25°C"
         font_size: station_label.font.pointSize
     }
 
     MItem {
-        id:out_humidity
+        id: out_hum
+        anchors.left: parent.left
+        anchors.top: out_temp.bottom
         image_source: "icons/water-percent.png"
         text_prop: "45%"
-        y: 50
         font_size: station_label.font.pointSize
     }
 
