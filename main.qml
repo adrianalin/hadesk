@@ -5,7 +5,7 @@ ApplicationWindow {
     visible: true
     width: 320
     height: 480
-    title: qsTr("Tabs")
+    title: qsTr("hadesk")
 
     SwipeView {
         id: swipeView

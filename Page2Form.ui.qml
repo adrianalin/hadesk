@@ -1,45 +1,77 @@
 import QtQuick 2.12
-import QtQuick.Controls 2.5
-import com.hadesk.Player 1.0
+import QtQuick.Controls 2.3
+import QtQuick.Controls.Styles 1.4
 
 Page {
     id: page
     width: 320
     height: 480
 
-    header: Label {
-        text: qsTr("Page 2")
-        font.pixelSize: Qt.application.font.pixelSize * 2
-        padding: 10
+    MItem {
+        id:out_temp
+        anchors.left: parent.left
+        image_source: "icons/thermometer"
+        text_prop: "25°C"
+        font_size: station_label.font.pointSize
+    }
+
+    MItem {
+        id:out_humidity
+        image_source: "icons/water-percent.png"
+        text_prop: "45%"
+        y: 50
+        font_size: station_label.font.pointSize
     }
 
     Label {
-        text: qsTr("You are on Page 2.")
-        anchors.centerIn: parent
-    }
-
-    Player {
-        id: player
-    }
-
-    Button {
-        id: button
-        width: 99
-        height: 40
-        text: qsTr("Button")
-        anchors.top: parent.top
-        anchors.topMargin: 6
+        id: station_label
         anchors.left: parent.left
-        anchors.leftMargin: 12
-        onClicked: {
-            console.log("Play")
-            player.play()
-        }
+        y: 200
+        text: qsTr("Station")
+        font.pointSize: 30
+    }
+
+    Label {
+        id: song_label
+        text: qsTr("Now Playing song title")
+        font.pointSize: 14
+        anchors.top: station_label.bottom
+        anchors.left: parent.left
+    }
+
+    MButton {
+        id: button_previous
+        image_source: "icons/skip-previous.png"
+        anchors.left: parent.left
+    }
+
+    MButton {
+        id: button_play
+        image_source: "icons/play.png"
+        anchors.left: button_previous.right
+    }
+
+    MButton {
+        id: button_next
+        image_source: "icons/skip-next.png"
+        anchors.left: button_play.right
+    }
+
+    MButton {
+        id: button_volume_down
+        image_source: "icons/volume-medium.png"
+        anchors.left: button_next.right
+    }
+
+    MButton {
+        id: button_volume_up
+        image_source: "icons/volume-high.png"
+        anchors.left: button_volume_down.right
+    }
+
+    MButton {
+        id: button_playlist
+        image_source: "icons/format-list-bulleted.png"
+        anchors.left: button_volume_up.right
     }
 }
-
-/*##^##
-Designer {
-    D{i:3;anchors_x:37;anchors_y:0}
-}
-##^##*/
