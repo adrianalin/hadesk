@@ -12,10 +12,10 @@ ApplicationWindow {
         anchors.fill: parent
         currentIndex: tabBar.currentIndex
 
-        Page1Form {
+        Player {
         }
 
-        Page2Form {
+        Page1Form {
         }
     }
 
