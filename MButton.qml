@@ -2,9 +2,10 @@ import QtQuick 2.12
 import QtQuick.Controls 2.3
 
 Button {
+    id: control
     anchors.bottom: parent.bottom
     property alias image_source: image.source
-    width: 53
+    width: 50
     height: 48
 
     Image {
@@ -14,6 +15,7 @@ Button {
     }
 
     background: Rectangle {
-        color: "#303030"
+        color: control.down ? "#a5d6a7" : "#424242"
+        opacity: enabled ? 1 : 0.3
     }
 }
