@@ -4,10 +4,6 @@ from player import Player
 
 
 MEDIA_TYPE_PLAYLIST = 'playlist'
-STATE_ON = 'on'
-STATE_OFF = 'off'
-STATE_PLAYING = 'playing'
-STATE_PAUSED = 'paused'
 CONF_HOST = 'host'
 CONF_PORT = 'port'
 CONF_NAME = 'name'
@@ -83,6 +79,8 @@ class MpdDevice(Player):
 
         self._update_playlists()
 
+        self.state = self._status["state"] if self._status else "off"
+
     @property
     def available(self):
         """Return true if MPD is available and connected."""
@@ -106,20 +104,6 @@ class MpdDevice(Player):
     def name(self):
         """Return the name of the device."""
         return self._name
-
-    @property
-    def state(self):
-        """Return the media state."""
-        if self._status is None:
-            return STATE_OFF
-        if self._status['state'] == 'play':
-            return STATE_PLAYING
-        if self._status['state'] == 'pause':
-            return STATE_PAUSED
-        if self._status['state'] == 'stop':
-            return STATE_OFF
-
-        return STATE_OFF
 
     @property
     def is_volume_muted(self):
@@ -286,6 +270,7 @@ class MpdDevice(Player):
         """Service to send the MPD the command to stop playing."""
         self._client.stop()
 
+    @pyqtSlot()
     def turn_on(self):
         """Service to send the MPD the command to start playing."""
         self._client.play()

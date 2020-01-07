@@ -1,19 +1,38 @@
-from PyQt5.QtCore import pyqtProperty, pyqtSlot, QObject
+from PyQt5.QtCore import pyqtProperty, pyqtSlot, QObject, pyqtSignal
 
 
 class Player(QObject):
+    stateChanged = pyqtSignal('QString')
+
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self._name = ""
+        # play/pause/stop
+        self._state = ''
 
     @pyqtProperty('QString')
     def media_title(self):
         print("media_title")
 
+    @pyqtProperty('QString', notify=stateChanged, fset="state")
+    def state(self):
+        print("state: ", self._state)
+        return self._state
+
+    @state.setter
+    def state(self, param):
+        if self._state != param:
+            print("set state: ", param)
+            self._state = param
+            self.stateChanged.emit(param)
+
     @pyqtProperty('QString')
     def source(self):
         print("Source")
+
+    @pyqtSlot()
+    def turn_on(self):
+        print("turn on")
 
     @pyqtSlot()
     def media_play(self):

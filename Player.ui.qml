@@ -83,10 +83,16 @@ Page {
 
         MButton {
             id: button_play
-            image_source: "icons/play.png"
+            image_source: player.state == "play"? "icons/pause.png" : "icons/play.png"
             anchors.left: button_previous.right
             onClicked: {
-                player.media_play()
+                if (player.state == "play") {
+                    player.media_pause()
+                } else {
+                    player.media_play()
+                    if (player.state == "stop")
+                        player.turn_on()
+                }
             }
         }
 
