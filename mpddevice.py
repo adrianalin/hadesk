@@ -1,6 +1,7 @@
 import logging
 from PyQt5.QtCore import pyqtProperty, pyqtSlot, QTimer
 from player import Player
+import os
 
 
 MEDIA_TYPE_PLAYLIST = 'playlist'
@@ -80,6 +81,7 @@ class MpdDevice(Player):
         self._update_playlists()
 
         self.state = self._status["state"] if self._status else "off"
+        self.media_title = self.get_media_title()
 
     @property
     def available(self):
@@ -121,8 +123,7 @@ class MpdDevice(Player):
         # Time does not exist for streams
         return self._currentsong.get('time')
 
-    @pyqtProperty('QString')
-    def media_title(self):
+    def get_media_title(self):
         """Return the title of current playing media."""
         name = self._currentsong.get('name', None)
         title = self._currentsong.get('title', None)

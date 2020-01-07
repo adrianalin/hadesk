@@ -3,16 +3,26 @@ from PyQt5.QtCore import pyqtProperty, pyqtSlot, QObject, pyqtSignal
 
 class Player(QObject):
     stateChanged = pyqtSignal('QString')
+    mediaTitleChanged = pyqtSignal('QString')
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
         # play/pause/stop
         self._state = ''
+        self._media_title = ''
 
-    @pyqtProperty('QString')
+    @pyqtProperty('QString', notify=mediaTitleChanged, fset="media_title")
     def media_title(self):
         print("media_title")
+        return self._media_title
+
+    @media_title.setter
+    def media_title(self, param):
+        if self._media_title != param:
+            print("set media_title", param)
+            self._media_title = param
+            self.mediaTitleChanged.emit(param)
 
     @pyqtProperty('QString', notify=stateChanged, fset="state")
     def state(self):
